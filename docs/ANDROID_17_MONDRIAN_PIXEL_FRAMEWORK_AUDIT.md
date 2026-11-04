@@ -2,11 +2,13 @@
 
 Date: 2026-11-04. Scope: **historical provenance, privilege boundaries and compatibility inventory only**. This is NOT an Android17 port and is NOT activated in the staged manifest.
 
+**Repository audit ownership:** this is an **independent supplemental review** of the already documented P1 item, not a competing port plan. The canonical P1 matrix and [existing original audit](https://github.com/PixelExperience-Reborn/vendor_pixel-framework/blob/audit/a17-pe-native-pixel-framework-20261104/docs/ANDROID_17_PIXEL_FRAMEWORK_AUDIT.md) remain unchanged. Its [initial source CI PASS](https://github.com/PixelExperience-Reborn/vendor_pixel-framework/actions/runs/41799942680) is separately established. This supplemental review verifies binary/decompilation provenance risks, privilege declarations, and interface boundaries; no old Google components are activated.
+
 ## Historical source and original-developer approach
 
 - PixelExperience-Reborn `vendor_pixel-framework`, archived `seventeen` HEAD `06014fc3ae69f8918ef9955b72b1484dd6948f83`. The repository contains approximately 1,807 tree entries (including 7 bundled JARs, many XML resources, Java/Kotlin classes and Pixel-specific Google AIDL).
 - The README itself warns that it is a **reference workflow**, explicitly **not an automation script**. It describes decompiling vendor-customized `SystemUIGoogle.apk`/`SettingsGoogle.apk`, adjusting resource identifiers, extracting DEX into `SettingsGoogle-lib.jar` and repackaging classes/resources. This shows how previous developers approached Pixel appearance; it does **not** demonstrate permission to redistribute all components, long-term Android API compatibility, or production code quality. **Do not execute the README commands**: several explicitly warn they can break the tree.
-- Historical patches include Google battery AIDL addition (`ba7ba58ff1c6de5fa97df0803a5e7b290` historical identifier to be confirmed), Pixel specific Settings and SystemUI resources, pocket/gesture controls and an Android14 QPR1 forward-port. Not every upstream or third-party commit should be described as a PE feature.
+- Historical patches include Google battery AIDL addition (`ba7ba58ff1c6de5fa97df6eda1d27c81b4abc136` historical identifier to be confirmed), Pixel specific Settings and SystemUI resources, pocket/gesture controls and an Android14 QPR1 forward-port. Not every upstream or third-party commit should be described as a PE feature.
 
 ## Verified Soong and security interfaces
 

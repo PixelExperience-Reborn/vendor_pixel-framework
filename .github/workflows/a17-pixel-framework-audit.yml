@@ -1,0 +1,34 @@
+name: AOSP17 P1 historical Pixel framework provenance and privilege audit
+
+on:
+  push:
+    branches:
+      - audit/a17-mondrian-pixel-framework-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  archived-platform-apps:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            .github
+            docs
+            tools
+            README.md
+            config.mk
+            SettingsGoogle/Android.bp
+            SettingsGoogle/AndroidManifest.xml
+            SystemUIGoogle/Android.bp
+            SystemUIGoogle/AndroidManifest.xml
+            interfaces/google_battery/Android.bp
+          sparse-checkout-cone-mode: false
+      - name: Check privileged overrides, jar/a11y/AIDL and archived provenance warnings
+        run: python3 tools/verify_a17_pixel_framework_legacy.py

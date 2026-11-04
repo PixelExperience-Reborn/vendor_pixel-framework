@@ -1,0 +1,34 @@
+name: P1 legacy Pixel framework privileged app audit
+
+on:
+  push:
+    branches:
+      - audit/a17-pe-native-pixel-framework-20261104
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    timeout-minutes: 18
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          filter: blob:none
+          sparse-checkout: |
+            .github
+            docs
+            tools
+            config.mk
+            README.md
+            SettingsGoogle/Android.bp
+            SystemUIGoogle/Android.bp
+            SettingsGoogle/AndroidManifest.xml
+            SystemUIGoogle/AndroidManifest.xml
+            interfaces/google_battery/Android.bp
+          sparse-checkout-cone-mode: false
+      - name: Audit legacy privileged APKs, package overrides, AIDL and license warning
+        run: python3 tools/verify_a17_pixel_framework_legacy.py
